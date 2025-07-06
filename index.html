@@ -6,7 +6,7 @@
     <title>Document</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+   
 </head>
 <body>
     <div class="container">
@@ -18,6 +18,7 @@
 </body>
 
 <script>
+    
     window.addEventListener("DOMContentLoaded", () => {
         fetch("http://127.0.0.1:8000/")
         .then(response => response.json())
@@ -32,7 +33,7 @@
             const li = document.createElement("li");
             const anchor = document.createElement("a");
             anchor.href=`view-item.html?item_id=${item.id}`
-            anchor.text="task name " + item.task;
+            anchor.text=item.task;
             li.appendChild(anchor);
             list.appendChild(li)
         }
