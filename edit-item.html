@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1>Edit Item</h1>
+    <input type="text" name="" id="task_desc">
+    <button id="myEditButton">edit task</button>
+</head>
+<body>
+</body>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParamValue = urlParams.get('item_id');
+    console.log(myParamValue);
+
+    document.getElementById("myEditButton").addEventListener('click', async function(event){
+        const content = document.getElementById("task_desc").value;
+
+        let headersList = {
+            "Content-Type": "application/json"
+        }
+
+        let bodyContent = JSON.stringify({
+            "task" : content 
+        });
+
+        let response = await fetch(`http://127.0.0.1:8000/${myParamValue}`, { 
+            method: "PUT",
+            body: bodyContent,
+            headers: headersList
+        });
+
+        let data = await response.text();
+        console.log("saved: " + data);
+    })
+
+</script>
+</html>

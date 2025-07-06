@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>View Item</h1>
+    <h3 id="myHeading"></h3>
+    <button id="myEditButton">Edit Item</button>
+    <button id="myDeleteButton">Delete Item</button>
+</body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParamValue = urlParams.get('item_id');
+    console.log("task id: " + myParamValue);
+
+     window.addEventListener("DOMContentLoaded", () => {
+        fetch(`http://127.0.0.1:8000/${myParamValue}`)
+        .then(response => response.json())
+        .then(renderItem);
+    });
+
+    const renderItem = (item) => {
+        const heading = document.getElementById("myHeading");
+        heading.innerHTML = "";
+        heading.textContent = item.task;
+        console.log(item.task);
+    } 
+
+    document.getElementById("myEditButton").addEventListener('click', function(event){
+        target_url =`edit-item.html?item_id=${myParamValue}`;
+        console.log(target_url);
+        window.location.href=target_url;
+    })
+
+    document.getElementById("myDeleteButton").addEventListener('click', async function(event){
+        let headersList = {}
+
+        let response = await fetch(`http://127.0.0.1:8000/${myParamValue}`, { 
+            method: "DELETE",
+            headers: headersList
+        });
+
+        let data = await response.text();
+            console.log("successfully deleted item: " + data);
+        })
+</script>
+</html>

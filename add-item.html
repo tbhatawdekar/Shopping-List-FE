@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Item</h1>
+    <label>Enter task name: 
+        <input type="text" name="" id="task_desc">
+        <button id="myAddButton">add task</button>
+    </label>
+</body>
+<script>
+     document.getElementById("myAddButton").addEventListener('click', async function(event){
+        const content = document.getElementById("task_desc").value;
+
+        let headersList = {
+            "Content-Type": "application/json"
+        }
+
+        let bodyContent = JSON.stringify({
+            "task" : content 
+        });
+
+        let response = await fetch(`http://127.0.0.1:8000/`, { 
+            method: "POST",
+            body: bodyContent,
+            headers: headersList
+        });
+
+        let data = await response.text();
+        console.log("added task successfully: " + data);
+    })
+</script>
+
+
+</html>
