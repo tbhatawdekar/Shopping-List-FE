@@ -10,6 +10,7 @@
     <h3 id="myHeading"></h3>
     <button id="myEditButton">Edit Item</button>
     <button id="myDeleteButton">Delete Item</button>
+    <button id="myBackButton">go back</button>
 </body>
 
 <script>
@@ -46,6 +47,11 @@
 
         let data = await response.text();
             console.log("successfully deleted item: " + data);
-        })
+            window.location.href = '/';
+    })
+
+    document.getElementById("myBackButton").addEventListener('click', function(event){
+        window.location.href = `/`
+    })
 </script>
 </html>
