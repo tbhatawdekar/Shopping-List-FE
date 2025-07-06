@@ -17,6 +17,9 @@
 
     document.getElementById("myEditButton").addEventListener('click', async function(event){
         const content = document.getElementById("task_desc").value;
+        if (content === "") {
+            throw new Error("content cannot be empty")
+        }
 
         let headersList = {
             "Content-Type": "application/json"
@@ -34,7 +37,7 @@
 
         let data = await response.text();
         console.log("saved: " + data);
+        window.location.href = `/view-item.html?item_id=${myParamValue}`
     })
-
 </script>
 </html>
