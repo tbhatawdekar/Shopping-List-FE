@@ -20,6 +20,7 @@
 <script>
     
     window.addEventListener("DOMContentLoaded", () => {
+        // fetch("http://127.0.0.1:8000/")
         fetch("https://shopping-list-x82q.onrender.com/")
         .then(response => response.json())
         .then(renderItems);
